@@ -18,17 +18,17 @@ Questions:
 - Why is the mean of `compute`, `elapsed_200` and `elapsed_error` much higher than 500ms?
 - How can I fix the large amount of 503 responses? -> increase `max_latency_ms`? Check Case 2
 
-|                        |       |      |       |      |       |
-|------------------------|-------|------|-------|------|-------|
-|Total time (s)          |92     |      |       |      |       |
-|Requests per second     |49     |      |       |      |       |
-|Milliseconds per request|20     |      |       |      |       |
+|                        |       | 
+|------------------------|-------|
+|Total time (s)          |92     |
+|Requests per second     |49     |
+|Milliseconds per request|20     |
 
-|                        |       |      |       |      |       |
-|------------------------|-------|------|-------|------|-------|
-|Response codes:         |       |      |       |      |       |
-|200                     |2130   |47.33%|       |      |       |
-|503                     |2370   |52.67%|       |      |       |
+
+|Response codes:         |N      |%     |
+|------------------------|-------|------|
+|200                     |2130   |47.33%|
+|503                     |2370   |52.67%|
 
 |Key                     |Mean   |Std   |Median |Min   |Max    |
 |------------------------|-------|------|-------|------|-------|
@@ -47,16 +47,15 @@ Questions:
 - Why are there some items waiting to be computed (`compute` time, bottom table) for almost as long as the full benchmark (145s)? 
 Instead of being computed in order of arrival
 
-|                        |       |      |       |      |       |
-|------------------------|-------|------|-------|------|-------|
-|Total time (s)          |145    |      |       |      |       |
-|Requests per second     |31     |      |       |      |       |
-|Milliseconds per request|32     |      |       |      |       |
+|                        |       |
+|------------------------|-------|
+|Total time (s)          |145    |
+|Requests per second     |31     |
+|Milliseconds per request|32     |
 
-|                        |       |      |       |      |       |
-|------------------------|-------|------|-------|------|-------|
-|Response codes:         |       |      |       |      |       |
-|200                     |4500   |100.00%|       |      |       |
+|Response codes:         |N      |%      |
+|------------------------|-------|-------|
+|200                     |4500   |100.00%|
 
 |Key                     |Mean   |Std   |Median |Min   |Max    |
 |------------------------|-------|------|-------|------|-------|
