@@ -8,7 +8,7 @@ from utils import (StopWatch,
                    nms,
                    postprocess_bbbox,
                    postprocess_boxes,
-                   base64_to_image_numpy, read_image_from_url)
+                   read_image_from_url)
 
 runner = bentoml.onnx.get("yolo_v4:latest").to_runner()
 
@@ -19,7 +19,7 @@ STRIDES = [8, 16, 32]
 XYSCALE = [1.2, 1.1, 1.05]
 
 STRIDES = np.array(STRIDES)
-input_size = 416
+INPUT_SIZE = 416
 
 
 @svc.api(input=JSON(), output=JSON())
@@ -32,7 +32,7 @@ async def detect(data: Dict) -> Dict:
     stopwatch.start_stop("preprocess")
     original_image_size = original_image.shape[:2]
 
-    image_data = image_preprocess(np.copy(original_image), [input_size, input_size])
+    image_data = image_preprocess(np.copy(original_image), [INPUT_SIZE, INPUT_SIZE])
     image_data = image_data[np.newaxis, ...].astype(np.float32)
     stopwatch.start_stop("preprocess")
 
@@ -43,7 +43,7 @@ async def detect(data: Dict) -> Dict:
     stopwatch.start_stop("postprocess")
     detections = [d.copy() for d in detections]
     pred_bbox = postprocess_bbbox(detections, ANCHORS, STRIDES, XYSCALE)
-    bboxes = postprocess_boxes(pred_bbox, original_image_size, input_size, 0.25)
+    bboxes = postprocess_boxes(pred_bbox, original_image_size, INPUT_SIZE, 0.25)
     bboxes = nms(bboxes, 0.213, method='nms')
     stopwatch.start_stop("postprocess")
     return {"bboxes": [bbox.tolist() for bbox in bboxes],

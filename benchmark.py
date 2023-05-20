@@ -8,7 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
 async def perform_request(semaphore, request):
     async with semaphore:
         async with httpx.AsyncClient() as client:

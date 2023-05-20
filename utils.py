@@ -9,6 +9,7 @@ from PIL import Image
 import numpy as np
 import time
 
+
 async def read_image_from_url(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
@@ -16,6 +17,7 @@ async def read_image_from_url(url):
             image = Image.open(BytesIO(image_bytes))
             image_array = np.array(image)
     return image_array
+
 
 def base64_to_image_numpy(encoded_string):
     decoded_data = base64.b64decode(encoded_string)
