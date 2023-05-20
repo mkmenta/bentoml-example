@@ -1,6 +1,6 @@
 
 # BentoML example
-Serving of YOLOv4 from https://github.com/onnx/models/blob/main/vision/object_detection_segmentation/yolov4/dependencies/inference.ipynb using [BentoML](https://github.com/bentoml/BentoML).
+Serving ONNX YOLOv4 from https://github.com/onnx/models/blob/main/vision/object_detection_segmentation/yolov4/dependencies/inference.ipynb using [BentoML](https://github.com/bentoml/BentoML).
 ## Benchmark results
 A few notes about the numbers:
 - All numbers are in **milliseconds** except for the `Total time` which is in seconds.
