@@ -1,0 +1,21 @@
+# api_server:
+#   logging:
+#     access:
+#       enabled: true
+#       # whether to log the size of the request body
+#       request_content_length: true
+#       # whether to log the content type of the request
+#       request_content_type: true
+#       # whether to log the content length of the response
+#       response_content_length: true
+#       # whether to log the content type of the response
+#       response_content_type: true
+runners:
+  # logging:
+  #   access:
+  #     enabled: true
+  yolo_v4:
+    batching:
+        enabled: true
+        max_batch_size: 8  
+        max_latency_ms: 1000000

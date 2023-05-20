@@ -1,0 +1,7 @@
+httpx
+bentoml==1.0.20
+numpy==1.23.1
+matplotlib
+tqdm
+onnx==1.13.0
+onnxruntime-gpu==1.13.1

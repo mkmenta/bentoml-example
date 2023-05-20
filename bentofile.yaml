@@ -1,0 +1,15 @@
+service: "service:svc" 
+labels:
+  owner: tester
+  stage: dev
+include:
+  - "utils.py" 
+  - "service.py"
+python:
+  requirements_txt: "requirements-service.txt"
+docker:
+    cuda_version: "11.6"
+    system_packages:
+      - ffmpeg
+      - libsm6
+      - libxext6
