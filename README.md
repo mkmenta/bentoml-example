@@ -2,10 +2,21 @@
 # BentoML example
 Serving of YOLOv4 from https://github.com/onnx/models/blob/main/vision/object_detection_segmentation/yolov4/dependencies/inference.ipynb using [BentoML](https://github.com/bentoml/BentoML).
 ## Benchmark results
-All numbers are in **milliseconds** except for the Total time which is in seconds.
+A few notes about the numbers:
+- All numbers are in **milliseconds** except for the `Total time` which is in seconds.
+- The `Milliseconds per request` is computed in average. The real milliseconds per request
+ (`response.elapsed.total_seconds()`) are shown as `elapsed_200` and `elapsed_error` in the bottom table.
+- The numbers of the bottom table (except the `elapsed*`) are obtained using the `StopWatch` directly in the `service.py`.
+The rest are obtained in `benchmark.py`.
 
 These numbers were obtained in an AWS EC2 g4dn.xlarge with a Tesla T4.
+
+The max_batch_size using the [max_bs_finder](/max_bs_finder) and [these](/max_bs_finder/results/yolo_v4.png) are the results.
+
 ### Case 1: max_latency_ms = 500 milliseconds
+Questions:
+- Why is the mean of `compute`, `elapsed_200` and `elapsed_error` much higher than 500ms?
+- How can I fix the large amount of 503 responses? -> increase `max_latency_ms`? Check Case 2
 
 |                        |       |      |       |      |       |
 |------------------------|-------|------|-------|------|-------|
@@ -30,6 +41,11 @@ These numbers were obtained in an AWS EC2 g4dn.xlarge with a Tesla T4.
 
 
 ### Case 2: max_latency_ms = infinite (1000 seconds)
+Setting the `max_latency_ms` very high removes the 503 status responses.
+
+Questions:
+- Why are there some items waiting to be computed (`compute` time, bottom table) for almost as long as the full benchmark (145s)? 
+Instead of being computed in order of arrival
 
 |                        |       |      |       |      |       |
 |------------------------|-------|------|-------|------|-------|
